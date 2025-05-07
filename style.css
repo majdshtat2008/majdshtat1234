@@ -1,0 +1,304 @@
+body {
+    background: #181c2b;
+    font-family: 'Cairo', Tahoma, Arial, sans-serif;
+    color: #ff3b3b;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+    animation: textColorMove 3s linear infinite alternate;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 20% 30%, #00adb5cc 0%, transparent 70%),
+                radial-gradient(ellipse at 80% 70%, #ffd36999 0%, transparent 80%),
+                radial-gradient(ellipse at 60% 10%, #ff2e6399 0%, transparent 80%),
+                linear-gradient(135deg, #232526 0%, #414345 100%);
+    animation: nebulaMove 12s ease-in-out infinite alternate;
+}
+@keyframes nebulaMove {
+    0% { background-position: 20% 30%, 80% 70%, 60% 10%, 0 0; }
+    100% { background-position: 30% 40%, 70% 60%, 50% 20%, 100% 100%; }
+}
+
+@keyframes textColorMove {
+    0% { color: #ff3b3b; }
+    50% { color: #ff7b7b; }
+    100% { color: #ff3b3b; }
+}
+
+.container {
+    background: rgba(34, 40, 49, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 #00adb555, 0 0 40px 10px #ffd36933;
+    padding: 40px 30px 20px 30px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border: 2px solid #00adb5;
+    backdrop-filter: blur(6px);
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1.2s cubic-bezier(.23,1.02,.64,1) both;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(60px) scale(0.95); }
+    to { opacity: 1; transform: none; }
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    color: #00adb5;
+    text-shadow: 0 0 16px #00adb5, 0 2px 8px #232526;
+    animation: glow 2.5s infinite alternate, textColorMove 3s linear infinite alternate;
+}
+@keyframes glow {
+    from { text-shadow: 0 0 16px #00adb5, 0 2px 8px #232526; }
+    to { text-shadow: 0 0 32px #ffd369, 0 2px 16px #232526; }
+}
+
+header p {
+    font-size: 1.1rem;
+    color: #eeeeee;
+    margin-bottom: 25px;
+    animation: textColorMove 3s linear infinite alternate;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 24px 4px #00adb555, 0 0 8px #ffd36955;
+    border-radius: 18px;
+    background: rgba(34, 40, 49, 0.7);
+    padding: 12px;
+    animation: boardPop 1.2s cubic-bezier(.23,1.02,.64,1) both 0.3s;
+}
+@keyframes boardPop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: none; }
+}
+
+.cell {
+    background: linear-gradient(135deg, #232526 60%, #393e46 100%);
+    border-radius: 12px;
+    font-size: 2.5rem;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s, background-position 1s;
+    background-size: 200% 200%;
+    background-position: left top;
+    animation: cellColorMove 2s linear infinite alternate;
+    box-shadow: 0 2px 16px #00adb555, 0 0 8px #ffd36933;
+    user-select: none;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #00adb5;
+}
+.cell:hover {
+    background: #232526;
+    transform: scale(1.05);
+    box-shadow: 0 0 24px #ffd36999, 0 2px 16px #00adb5;
+    filter: brightness(1.15);
+}
+.cell:active {
+    transform: scale(0.97);
+    filter: brightness(0.95);
+}
+.cell::after {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 16px 4px #ffd36933;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@keyframes cellColorMove {
+    0% { background-position: left top; }
+    100% { background-position: right bottom; }
+}
+
+.cell.x {
+    background-image: linear-gradient(135deg, #ff3b3b 0%, #ff7b7b 100%);
+    animation: xColorMove 2s linear infinite alternate;
+}
+@keyframes xColorMove {
+    0% { background-position: left top; }
+    100% { background-position: right bottom; }
+}
+
+.cell.o {
+    background-image: linear-gradient(135deg, #2196f3 0%, #00e0ff 100%);
+    animation: oColorMove 2s linear infinite alternate;
+}
+@keyframes oColorMove {
+    0% { background-position: right top; }
+    100% { background-position: left bottom; }
+}
+
+.game-info {
+    margin-bottom: 15px;
+}
+#status {
+    font-size: 1.1rem;
+    color: #ffd369;
+    margin-bottom: 10px;
+    display: block;
+    text-shadow: 0 0 8px #ffd369, 0 2px 8px #232526;
+    font-weight: bold;
+    letter-spacing: 1px;
+    animation: textColorMove 3s linear infinite alternate;
+}
+#restart {
+    background: #00adb5;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 0 16px #00adb5aa, 0 2px 8px #ffd36955;
+    font-weight: bold;
+    letter-spacing: 1px;
+    animation: pulseBtn 2s infinite alternate;
+}
+@keyframes pulseBtn {
+    from { box-shadow: 0 0 16px #00adb5aa, 0 2px 8px #ffd36955; }
+    to { box-shadow: 0 0 32px #ffd369cc, 0 2px 16px #00adb5; }
+}
+#restart:hover {
+    background: #008b8b;
+    filter: brightness(1.15);
+    box-shadow: 0 0 32px #ffd369cc, 0 2px 16px #00adb5;
+}
+
+footer {
+    margin-top: 20px;
+    color: #aaaaaa;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00adb5, 0 2px 8px #232526;
+    animation: fadeInUp 1.2s cubic-bezier(.23,1.02,.64,1) both 0.7s, textColorMove 3s linear infinite alternate;
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 20px 5px 10px 5px;
+        max-width: 98vw;
+    }
+    .game-board {
+        grid-template-columns: repeat(3, 60px);
+        grid-template-rows: repeat(3, 60px);
+        gap: 6px;
+    }
+    .cell {
+        font-size: 2rem;
+    }
+}
+
+/* تأثير نجوم متحركة */
+.stars {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle {
+    from { opacity: 0.7; }
+    to { opacity: 1; }
+}
+
+/* صور الفرق */
+.teams-images-section {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 32px 0 18px 0;
+    flex-wrap: wrap;
+    z-index: 2;
+    position: relative;
+}
+.team-image-card {
+    background: linear-gradient(135deg, #232526 60%, #393e46 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #00adb555, 0 0 16px #ffd36933;
+    padding: 18px 18px 12px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+    max-width: 240px;
+    margin-bottom: 10px;
+    border: 2px solid #00adb5;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+.team-image-card:hover {
+    transform: scale(1.04) rotate(-1deg);
+    box-shadow: 0 8px 32px #ffd36999, 0 0 32px #00adb5;
+}
+.team-img {
+    width: 100%;
+    max-width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 2px 16px #00adb555, 0 0 8px #ffd36933;
+    border: 3px solid #ffd369;
+    margin-bottom: 10px;
+    background: #fff;
+}
+.team-img-label {
+    font-size: 1.15rem;
+    color: #ffd369;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00adb5, 0 2px 8px #232526;
+    margin-top: 2px;
+}
+@media (max-width: 600px) {
+    .teams-images-section {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .team-image-card {
+        min-width: 140px;
+        max-width: 98vw;
+        padding: 10px 6px 8px 6px;
+    }
+    .team-img {
+        max-width: 120px;
+        height: 120px;
+    }
+}

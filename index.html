@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XO Game | _xo.web Gift</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="./images/WhatsApp Image 2025-05-08 at 00.03.12_247934ec.jpg">
+    <base href="./">
+</head>
+<body>
+    <div class="container main-center">
+        <header>
+            <h1>XO Game - Gift for _xo.web Team</h1>
+            <p>Welcome to the XO game with a professional and unique design. Enjoy playing and share the challenge!</p>
+        </header>
+        <main>
+            <div id="game-board" class="game-board"></div>
+            <div class="game-info">
+                <span id="status"></span>
+                <button id="restart">Restart</button>
+            </div>
+        </main>
+        <div class="team-info-section">
+            <footer>
+                <p>Special dedication from Majd Shtat to his brother Hashem Shtat and the wonderful _xo.web team. We wish you enjoyable and challenging times!</p>
+            </footer>
+            <div class="teams-cards">
+                <div class="team-card">
+                    <h2>_xo.web</h2>
+                    <a href="https://www.instagram.com/_xo.web/" target="_blank" class="insta-link">@_xo.web</a>
+                </div>
+                <div class="team-card">
+                    <h2>Unlimited Team</h2>
+                    <a href="https://www.instagram.com/unlimited_team1/" target="_blank" class="insta-link">@unlimited_team1</a>
+                </div>
+            </div>
+            <div class="contact-info">
+                <p>Phone: <a href="tel:0785441284">0785441284</a></p>
+                <p>Email: <a href="mailto:magdshtat19@gmail.com">magdshtat19@gmail.com</a></p>
+            </div>
+            <div class="love-message">
+                <h3>Love & Encouragement</h3>
+                <p>To my dear brother Hashem and his wonderful team _xo.web, you are a source of inspiration and pride for me. I believe in your abilities and creativity, and I wish you more success and brilliance in every new challenge. Keep excelling, you make a difference with your beautiful spirit and teamwork. All love and support always! ❤️</p>
+            </div>
+            <div class="teams-images-section" style="margin-top:32px;">
+                <div class="team-image-card">
+                    <img src="images/WhatsApp Image 2025-05-08 at 00.03.12_247934ec.jpg" alt="_xo.web Team Photo" class="team-img" />
+                    <div class="team-img-label">_xo.web</div>
+                </div>
+                <div class="team-image-card">
+                    <img src="images/WhatsApp Image 2025-05-08 at 00.03.13_698b1304.jpg" alt="Unlimited Team Photo" class="team-img" />
+                    <div class="team-img-label">Unlimited Team</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="stars" id="stars"></div>
+    <style>
+    .main-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
+    }
+    .team-info-section {
+        margin: 40px auto 0 auto;
+        background: rgba(255,255,255,0.12);
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+        padding: 32px 18px 24px 18px;
+        max-width: 600px;
+        text-align: center;
+        backdrop-filter: blur(2px);
+    }
+    .teams-cards {
+        display: flex;
+        justify-content: space-around;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+    }
+    .team-card {
+        background: linear-gradient(135deg, #f7cac9 0%, #92a8d1 100%);
+        border-radius: 12px;
+        padding: 18px 24px;
+        min-width: 180px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 10px;
+    }
+    .insta-link {
+        display: inline-block;
+        margin-top: 8px;
+        color: #fff;
+        background: #e1306c;
+        padding: 6px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.2s;
+    }
+    .insta-link:hover {
+        background: #c13584;
+    }
+    .contact-info {
+        margin: 18px 0 10px 0;
+        font-size: 1.1em;
+    }
+    .contact-info a {
+        color: #0077b6;
+        text-decoration: underline;
+    }
+    .love-message {
+        margin-top: 18px;
+        background: #fff3cd;
+        border-radius: 10px;
+        padding: 14px 10px;
+        color: #856404;
+        font-weight: 500;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .love-message h3 {
+        margin-bottom: 8px;
+        color: #d63384;
+    }
+    </style>
+    <script src="./script.js"></script>
+    <script>
+    // Moving stars background
+    const starsContainer = document.getElementById('stars');
+    function createStars(num) {
+        starsContainer.innerHTML = '';
+        for(let i=0;i<num;i++){
+            const s = document.createElement('div');
+            s.className = 'star';
+            s.style.left = Math.random()*100+'vw';
+            s.style.top = Math.random()*100+'vh';
+            const duration = Math.random()*6+4;
+            const delay = Math.random()*4;
+            const moveY = 100 + Math.random()*40;
+            s.style.setProperty('--moveY', moveY+'vh');
+            s.style.animation = `star-move ${duration}s linear infinite`;
+            s.style.animationDelay = `${delay}s`;
+            s.style.opacity = Math.random()*0.5+0.5;
+            starsContainer.appendChild(s);
+        }
+    }
+    createStars(90);
+    window.addEventListener('resize',()=>createStars(90));
+    if (!document.getElementById('stars-anim-style')) {
+        const style = document.createElement('style');
+        style.id = 'stars-anim-style';
+        style.textContent = `
+        @keyframes star-move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(var(--moveY, 120vh)); opacity: 0.2; }
+        }
+        `;
+        document.head.appendChild(style);
+    }
+    </script>
+</body>
+</html>
